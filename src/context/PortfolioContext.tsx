@@ -2,7 +2,9 @@ import React, { createContext, useContext, useState, useEffect, ReactNode } from
 import { PortfolioData, Project, BlogPost, Profile, ContactMessage } from '../types/portfolio';
 import { INITIAL_PORTFOLIO_DATA } from '../data/initialData';
 
-const STORAGE_KEY = 'majestic_portfolio_data_v2';
+const STORAGE_KEY = 'majestic_portfolio_data_v4';
+const THEME_KEY = 'majestic_theme_mode';
+const ADMIN_AUTH_KEY = 'majestic_admin_auth_00';
 
 interface ToastInfo {
   message: string;
@@ -12,10 +14,23 @@ interface ToastInfo {
 
 interface PortfolioContextType {
   data: PortfolioData;
+  theme: 'dark' | 'light';
+  toggleTheme: () => void;
   isAdmin: boolean;
   setIsAdmin: (val: boolean) => void;
   adminTab: 'projects' | 'blog' | 'profile' | 'socials' | 'messages' | 'backup';
   setAdminTab: (tab: 'projects' | 'blog' | 'profile' | 'socials' | 'messages' | 'backup') => void;
+  adminLoginModalOpen: boolean;
+  setAdminLoginModalOpen: (val: boolean) => void;
+  unlockAdminWithPassword: (pass: string) => boolean;
+  lockAdmin: () => void;
+  triggerAdminCheck: (input: string) => boolean;
+  
+  // Profile zoom modal
+  isProfileZoomOpen: boolean;
+  setIsProfileZoomOpen: (val: boolean) => void;
+
+  // Selected modals
   selectedProject: Project | null;
   setSelectedProject: (p: Project | null) => void;
   selectedBlog: BlogPost | null;
@@ -65,7 +80,29 @@ export const PortfolioProvider: React.FC<{ children: ReactNode }> = ({ children 
     return INITIAL_PORTFOLIO_DATA;
   });
 
-  const [isAdmin, setIsAdmin] = useState<boolean>(false);
+  const [theme, setTheme] = useState<'dark' | 'light'>(() => {
+    try {
+      const savedTheme = localStorage.getItem(THEME_KEY);
+      if (savedTheme === 'light' || savedTheme === 'dark') {
+        return savedTheme;
+      }
+    } catch (e) {
+      // ignore
+    }
+    return 'dark';
+  });
+
+  // Admin session: strictly secured by password '00'
+  const [isAdmin, setIsAdmin] = useState<boolean>(() => {
+    try {
+      return sessionStorage.getItem(ADMIN_AUTH_KEY) === 'authenticated_00';
+    } catch (e) {
+      return false;
+    }
+  });
+
+  const [adminLoginModalOpen, setAdminLoginModalOpen] = useState<boolean>(false);
+  const [isProfileZoomOpen, setIsProfileZoomOpen] = useState<boolean>(false);
   const [adminTab, setAdminTab] = useState<'projects' | 'blog' | 'profile' | 'socials' | 'messages' | 'backup'>('projects');
   
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
@@ -79,6 +116,81 @@ export const PortfolioProvider: React.FC<{ children: ReactNode }> = ({ children 
 
   const [toasts, setToasts] = useState<ToastInfo[]>([]);
 
+  // Apply theme class to document element
+  useEffect(() => {
+    try {
+      localStorage.setItem(THEME_KEY, theme);
+      if (theme === 'dark') {
+        document.documentElement.classList.add('dark');
+        document.documentElement.classList.remove('light');
+      } else {
+        document.documentElement.classList.add('light');
+        document.documentElement.classList.remove('dark');
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  }, [theme]);
+
+  // Check URL on load and changes for the admin endpoint
+  useEffect(() => {
+    const checkAdminRoute = () => {
+      const href = window.location.href.toLowerCase();
+      const hash = window.location.hash.toLowerCase();
+      const path = window.location.pathname.toLowerCase();
+      const search = window.location.search.toLowerCase();
+      
+      if (
+        href.includes('portfolio.serviceforeuphoria.workers.dev/admin') ||
+        href.includes('/admin') ||
+        hash === '#admin' ||
+        hash.includes('/admin') ||
+        path.endsWith('/admin') ||
+        search.includes('admin')
+      ) {
+        if (!isAdmin) {
+          setAdminLoginModalOpen(true);
+        }
+      }
+    };
+
+    checkAdminRoute();
+    window.addEventListener('hashchange', checkAdminRoute);
+    window.addEventListener('popstate', checkAdminRoute);
+    return () => {
+      window.removeEventListener('hashchange', checkAdminRoute);
+      window.removeEventListener('popstate', checkAdminRoute);
+    };
+  }, [isAdmin]);
+
+  // Global key combination to access admin: Ctrl + Shift + A
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'a') {
+        e.preventDefault();
+        setAdminLoginModalOpen(true);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
+  // Helper to trigger admin modal when searching for admin URL
+  const triggerAdminCheck = (input: string): boolean => {
+    const trimmed = input.trim().toLowerCase();
+    if (
+      trimmed === 'https://portfolio.serviceforeuphoria.workers.dev/admin' ||
+      trimmed === 'portfolio.serviceforeuphoria.workers.dev/admin' ||
+      trimmed.includes('serviceforeuphoria.workers.dev/admin') ||
+      trimmed === '/admin' ||
+      trimmed === 'admin'
+    ) {
+      setAdminLoginModalOpen(true);
+      return true;
+    }
+    return false;
+  };
+
   // Auto-save to localStorage
   useEffect(() => {
     try {
@@ -88,12 +200,36 @@ export const PortfolioProvider: React.FC<{ children: ReactNode }> = ({ children 
     }
   }, [data]);
 
+  const toggleTheme = () => {
+    setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
+  };
+
   const showToast = (message: string, type: 'success' | 'info' | 'error' = 'success') => {
     const id = Date.now() + Math.random();
     setToasts(prev => [...prev, { message, type, id }]);
     setTimeout(() => {
       setToasts(prev => prev.filter(t => t.id !== id));
     }, 4000);
+  };
+
+  // Password verification: strictly '00'
+  const unlockAdminWithPassword = (password: string): boolean => {
+    if (password.trim() === '00') {
+      setIsAdmin(true);
+      sessionStorage.setItem(ADMIN_AUTH_KEY, 'authenticated_00');
+      setAdminLoginModalOpen(false);
+      showToast('Admin panel unlocked with passcode 00. Welcome back!', 'success');
+      return true;
+    } else {
+      showToast('Security Error: Invalid passcode. Please enter 00.', 'error');
+      return false;
+    }
+  };
+
+  const lockAdmin = () => {
+    setIsAdmin(false);
+    sessionStorage.removeItem(ADMIN_AUTH_KEY);
+    showToast('Admin session locked and hidden.', 'info');
   };
 
   const updateProfile = (profile: Profile) => {
@@ -146,7 +282,6 @@ export const PortfolioProvider: React.FC<{ children: ReactNode }> = ({ children 
       list[index] = list[targetIndex];
       list[targetIndex] = temp;
       
-      // Update order property
       const reindexed = list.map((item, idx) => ({ ...item, order: idx + 1 }));
       return { ...prev, projects: reindexed };
     });
@@ -250,10 +385,19 @@ export const PortfolioProvider: React.FC<{ children: ReactNode }> = ({ children 
     <PortfolioContext.Provider
       value={{
         data,
+        theme,
+        toggleTheme,
         isAdmin,
         setIsAdmin,
         adminTab,
         setAdminTab,
+        adminLoginModalOpen,
+        setAdminLoginModalOpen,
+        unlockAdminWithPassword,
+        lockAdmin,
+        triggerAdminCheck,
+        isProfileZoomOpen,
+        setIsProfileZoomOpen,
         selectedProject,
         setSelectedProject,
         selectedBlog,

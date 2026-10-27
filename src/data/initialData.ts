@@ -8,7 +8,7 @@ export const INITIAL_PORTFOLIO_DATA: PortfolioData = {
     tagline: 'Architecting high-density operational software, scientific telemetry systems, and immersive web experiences.',
     bioHeadline: 'Designing the critical software layer for high-stakes industries.',
     bioParagraphs: [
-      'I am an end-to-end product designer and full-stack systems engineer based in Dhaka, Bangladesh. Over the past 8+ years, I have specialized in turning complex, multi-variable domain problems—from national pharmacy ERPs and RMG supply chain traceability to planetary weather telemetry—into calm, high-velocity digital products.',
+      'I am an end-to-end product designer and full-stack systems engineer based in Dhaka, Bangladesh. Over the past 8+ years, I have specialized in turning complex, multi-variable domain problems: from national pharmacy ERPs and RMG supply chain traceability to planetary weather telemetry, into calm, high-velocity digital products.',
       'My work bridges mathematical precision with humanist editorial elegance: I design design systems in Figma and write the production React, Canvas, and serverless architectures that bring them to life with zero latency and relentless typographic clarity.',
       'When not architecting enterprise SaaS platforms, I build retro-arcade Canvas physics games and curate chromatic abstract fluid graphics licensed globally on Adobe Stock.'
     ],
@@ -79,7 +79,7 @@ export const INITIAL_PORTFOLIO_DATA: PortfolioData = {
     {
       id: 'proj-panacea',
       slug: 'panacea-pharmacy-dims-system',
-      title: 'PANACEA — Pharmacy Operations & DIMS Clinical Registry',
+      title: 'PANACEA: Pharmacy Operations & DIMS Clinical Registry',
       subtitle: 'DGDA-compliant clinical dispensary ERP with cold-chain telemetry and double-entry financial P&L.',
       category: 'Enterprise SaaS',
       client: 'PharmaCare Network & DGDA Healthcare Dispensaries',
@@ -152,7 +152,7 @@ export const INITIAL_PORTFOLIO_DATA: PortfolioData = {
     {
       id: 'proj-cosmic-odyssey',
       slug: 'cosmic-odyssey-dhaka-space-arcade',
-      title: 'Cosmic Odyssey — Dhaka Stratosphere Flight Arcade',
+      title: 'Cosmic Odyssey: Dhaka Stratosphere Flight Arcade',
       subtitle: 'Retro-futuristic Canvas flight simulator and space combat game with progressive orbital tiers.',
       category: 'Interactive & Games',
       client: 'Creative Lab & Interactive Web Project',
@@ -175,7 +175,7 @@ export const INITIAL_PORTFOLIO_DATA: PortfolioData = {
     {
       id: 'proj-insight-institute',
       slug: 'insight-institute-academic-olympiad-platform',
-      title: 'Insight Institute — Academic Coaching & Olympiad Platform',
+      title: 'Insight Institute: Academic Coaching & Olympiad Platform',
       subtitle: 'Bilingual EdTech platform and student admissions hub for competitive mathematics and science.',
       category: 'UI/UX Systems',
       client: 'Insight Institute (BUET & DU Instructor Panel)',
@@ -244,7 +244,7 @@ export const INITIAL_PORTFOLIO_DATA: PortfolioData = {
     {
       id: 'proj-behance-brand',
       slug: 'majestic-soul-brand-system',
-      title: 'Majestic Soul — Identity, Monograph & Behance Showcase',
+      title: 'Majestic Soul: Identity, Monograph & Behance Showcase',
       subtitle: 'Personal brand mark, design tokens, and verified Behance design archive.',
       category: 'UI/UX Systems',
       client: 'Majestic Soul Studio',

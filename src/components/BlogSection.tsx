@@ -1,26 +1,36 @@
 import React from 'react';
 import { usePortfolio } from '../context/PortfolioContext';
 import { BlogPost } from '../types/portfolio';
-import { BookOpen, ArrowRight, Plus, Edit3, Clock } from 'lucide-react';
+import { BookOpen, ArrowRight, Plus, Edit3, Clock, Sparkles, Tag, FileText } from 'lucide-react';
 
 export const BlogSection: React.FC = () => {
-  const { data, setSelectedBlog, isAdmin, setEditingBlog, setIsCreatingBlog } = usePortfolio();
+  const { data, setSelectedBlog, isAdmin, setEditingBlog, setIsCreatingBlog, theme } = usePortfolio();
 
   const publishedPosts = data.blogPosts.filter(p => p.isPublished || isAdmin);
 
   return (
-    <section id="journal" className="py-20 border-b border-zinc-800/60 scroll-mt-12">
+    <section
+      id="journal"
+      className={`py-20 border-b transition-colors scroll-mt-12 ${
+        theme === 'dark'
+          ? 'bg-zinc-950 border-zinc-800/60 text-zinc-100'
+          : 'bg-zinc-50 border-zinc-200/80 text-zinc-900'
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div>
-            <div className="text-xs font-mono uppercase tracking-wider text-amber-400 mb-2">
-              Writing & Field Notes
+            <div className="text-xs font-mono uppercase tracking-wider text-amber-500 mb-2 flex items-center gap-1.5">
+              <FileText className="w-3.5 h-3.5 text-amber-500" />
+              <span>Writing & Field Notes</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
               Design Systems & Systems Journal
             </h2>
-            <p className="text-zinc-400 text-sm sm:text-base mt-2 max-w-2xl">
+            <p className={`text-sm sm:text-base mt-2 max-w-2xl ${
+              theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'
+            }`}>
               Reflections on high-density data visualizations, edge infrastructure, and canvas micro-optimizations.
             </p>
           </div>
@@ -41,15 +51,19 @@ export const BlogSection: React.FC = () => {
 
         {/* Posts Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {publishedPosts.map((post, idx) => (
+          {publishedPosts.map(post => (
             <article
               key={post.id}
               onClick={() => setSelectedBlog(post)}
-              className="group flex flex-col p-6 rounded-2xl border border-zinc-800 bg-zinc-900/40 hover:bg-zinc-900/80 hover:border-zinc-700 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-xl"
+              className={`group flex flex-col p-6 rounded-2xl border transition-all duration-300 cursor-pointer shadow-sm hover:shadow-xl ${
+                theme === 'dark'
+                  ? 'bg-zinc-900/40 border-zinc-800 hover:bg-zinc-900/80 hover:border-zinc-700'
+                  : 'bg-white border-zinc-200 hover:border-zinc-300 shadow-sm'
+              }`}
             >
               {/* Cover thumbnail if present */}
               {post.coverImage && (
-                <div className="relative aspect-16/9 rounded-xl overflow-hidden bg-zinc-950 mb-5 border border-zinc-800">
+                <div className="relative aspect-16/9 rounded-xl overflow-hidden bg-zinc-950 mb-5 border border-zinc-800/80">
                   <img
                     src={post.coverImage}
                     alt={post.title}
@@ -64,45 +78,60 @@ export const BlogSection: React.FC = () => {
                 </div>
               )}
 
-              {/* Unboxed Metadata (NO PILLS) */}
-              <div className="flex items-center gap-2 text-xs text-zinc-400 mb-3 font-mono">
-                <span className="text-amber-400/90">{post.category}</span>
+              {/* Unboxed Metadata */}
+              <div className={`flex items-center gap-2 text-xs mb-3 font-mono ${
+                theme === 'dark' ? 'text-zinc-400' : 'text-zinc-500'
+              }`}>
+                <span className="text-amber-500 font-semibold">{post.category}</span>
                 <span aria-hidden="true">·</span>
                 <span>{post.publishedAt}</span>
                 <span aria-hidden="true">·</span>
-                <span className="flex items-center gap-1 text-zinc-400">
-                  <Clock className="w-3 h-3 text-zinc-500" />
+                <span className="flex items-center gap-1">
+                  <Clock className="w-3 h-3 text-zinc-400" />
                   <span>{post.readTime}</span>
                 </span>
               </div>
 
               {/* Post Title */}
-              <h3 className="text-lg sm:text-xl font-bold text-white group-hover:text-amber-300 transition-colors leading-snug mb-3">
+              <h3 className={`text-lg sm:text-xl font-bold transition-colors leading-snug mb-3 ${
+                theme === 'dark'
+                  ? 'text-white group-hover:text-amber-300'
+                  : 'text-zinc-900 group-hover:text-amber-600'
+              }`}>
                 {post.title}
               </h3>
 
               {/* Excerpt */}
-              <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed line-clamp-3 mb-6">
+              <p className={`text-xs sm:text-sm leading-relaxed line-clamp-3 mb-6 ${
+                theme === 'dark' ? 'text-zinc-300' : 'text-zinc-600'
+              }`}>
                 {post.excerpt}
               </p>
 
               {/* Bottom Row */}
-              <div className="mt-auto pt-4 border-t border-zinc-800/80 flex items-center justify-between">
+              <div className={`mt-auto pt-4 border-t flex items-center justify-between ${
+                theme === 'dark' ? 'border-zinc-800/80' : 'border-zinc-100'
+              }`}>
                 <div className="flex items-center gap-2">
                   {post.tags.slice(0, 3).map((tag, i) => (
-                    <span key={i} className="text-[11px] font-mono text-zinc-500">
+                    <span
+                      key={i}
+                      className={`text-[11px] font-mono ${
+                        theme === 'dark' ? 'text-zinc-500' : 'text-zinc-400'
+                      }`}
+                    >
                       #{tag}
                     </span>
                   ))}
                 </div>
 
-                <div className="flex items-center gap-1.5 text-xs font-semibold text-amber-400 group-hover:translate-x-1 transition-transform">
+                <div className="flex items-center gap-1.5 text-xs font-semibold text-amber-500 group-hover:translate-x-1 transition-transform">
                   <span>Read Essay</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </div>
               </div>
 
-              {/* Admin Quick Edit */}
+              {/* Admin Quick Edit if unlocked with 00 */}
               {isAdmin && (
                 <div
                   className="mt-3 pt-3 border-t border-dashed border-amber-500/30 flex justify-end"

@@ -63,7 +63,8 @@ export const AdminPanel: React.FC = () => {
     resetToDefaults,
     exportDataJSON,
     importDataJSON,
-    showToast
+    showToast,
+    lockAdmin
   } = usePortfolio();
 
   // Local form states
@@ -165,10 +166,10 @@ export const AdminPanel: React.FC = () => {
             <span className="hidden sm:inline">Export Backup</span>
           </button>
           <button
-            onClick={() => setIsAdmin(false)}
-            className="px-3.5 py-1.5 rounded-lg bg-amber-400 hover:bg-amber-300 text-zinc-950 font-semibold text-xs transition-colors flex items-center gap-1.5 shadow"
+            onClick={lockAdmin}
+            className="px-3.5 py-1.5 rounded-lg bg-amber-400 hover:bg-amber-300 text-zinc-950 font-bold text-xs transition-colors flex items-center gap-1.5 shadow"
           >
-            <span>Exit Admin Panel</span>
+            <span>Lock & Exit Admin</span>
           </button>
         </div>
       </div>
