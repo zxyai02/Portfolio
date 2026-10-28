@@ -1,5 +1,6 @@
 import React from 'react';
 import { usePortfolio } from '../context/PortfolioContext';
+import { SmartProfileIcon } from './SmartProfileIcon';
 import {
   ArrowUpRight,
   ShieldCheck,
@@ -15,7 +16,9 @@ import {
   Briefcase,
   TrendingUp,
   Activity,
-  Award
+  Award,
+  Cpu,
+  Zap
 } from 'lucide-react';
 
 export const Hero: React.FC = () => {
@@ -40,27 +43,20 @@ export const Hero: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
           {/* Left Column: Typographic Narrative & Creator Badge */}
           <div className="lg:col-span-7 flex flex-col items-start">
-            {/* Interactive Profile & Location Kicker Bar */}
+            {/* Interactive Profile & Location Kicker Bar with Smart Icon */}
             <div className="flex flex-wrap items-center gap-2 text-xs font-mono mb-5">
               <button
                 onClick={() => setIsProfileZoomOpen(true)}
-                className={`flex items-center gap-1.5 px-3 py-1 rounded-full border transition-all ${
+                className={`flex items-center gap-2 px-3 py-1.5 rounded-full border transition-all ${
                   theme === 'dark'
                     ? 'bg-zinc-900/90 border-amber-500/40 text-amber-400 hover:border-amber-400 hover:bg-zinc-800'
                     : 'bg-amber-50 border-amber-300 text-amber-700 hover:bg-amber-100'
                 }`}
-                title="Click to zoom profile image"
+                title="Click to zoom smart profile icon"
               >
-                <div className="w-4 h-4 rounded-full overflow-hidden border border-amber-400/60 shrink-0">
-                  <img
-                    src={data.profile.avatarUrl}
-                    alt={data.profile.name}
-                    referrerPolicy="no-referrer"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <span className="font-semibold">{data.profile.name}</span>
-                <ZoomIn className="w-3 h-3 ml-0.5 opacity-70" />
+                <SmartProfileIcon size="sm" interactive={false} />
+                <span className="font-semibold tracking-wider">{data.profile.name}</span>
+                <ZoomIn className="w-3.5 h-3.5 opacity-70" />
               </button>
 
               <span className="text-zinc-400 hidden sm:inline" aria-hidden="true">·</span>
@@ -86,20 +82,35 @@ export const Hero: React.FC = () => {
               </div>
             </div>
 
-            {/* Display Headline with Animated Gradient Highlight */}
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.08] mb-6 [text-wrap:balance]">
-              <span>Architecting high-density </span>
-              <span className="bg-gradient-to-r from-amber-400 via-rose-400 to-indigo-400 bg-clip-text text-transparent font-black animate-aurora">
-                operational software
+            {/* Display Headline with Animated Gradient Highlight: "Hi, I'm SYED AMZAD HOSSAIN" */}
+            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.08] mb-4 [text-wrap:balance]">
+              <span className="block text-zinc-400 text-2xl sm:text-3xl lg:text-4xl font-semibold mb-2">
+                Hi, I&apos;m
               </span>
-              <span>, scientific telemetry, and immersive systems.</span>
+              <span className="bg-gradient-to-r from-amber-400 via-rose-400 to-indigo-400 bg-clip-text text-transparent font-black tracking-wide animate-aurora uppercase">
+                SYED AMZAD HOSSAIN
+              </span>
             </h1>
 
-            {/* Lead Narrative */}
-            <p className={`text-base sm:text-lg leading-relaxed max-w-2xl mb-8 ${
+            {/* Bio Paragraph 1: "INDUSTRIAL ENGINEER & Tech Enthusiastic" */}
+            <div className="mb-6 flex flex-wrap items-center gap-3">
+              <div
+                className={`px-4 py-2 rounded-xl border text-sm sm:text-base font-bold tracking-wider uppercase flex items-center gap-2 shadow-sm ${
+                  theme === 'dark'
+                    ? 'bg-amber-400/10 border-amber-400/30 text-amber-300'
+                    : 'bg-amber-50 border-amber-300 text-amber-800'
+                }`}
+              >
+                <Zap className="w-4 h-4 text-amber-400 animate-pulse" />
+                <span>{data.profile.bioParagraphs[0]}</span>
+              </div>
+            </div>
+
+            {/* Supporting Narrative */}
+            <p className={`text-sm sm:text-base leading-relaxed max-w-2xl mb-8 ${
               theme === 'dark' ? 'text-zinc-300' : 'text-zinc-700 font-normal'
             }`}>
-              {data.profile.bioParagraphs[0]}
+              {data.profile.bioParagraphs[1] || 'Architecting high-density operational software, scientific telemetry systems, and digital engineering workflows.'}
             </p>
 
             {/* Action Buttons */}
@@ -121,8 +132,8 @@ export const Hero: React.FC = () => {
                     : 'bg-white border-zinc-300 text-zinc-800 hover:bg-zinc-100 shadow-sm'
                 }`}
               >
-                <User className="w-4 h-4 text-amber-500" />
-                <span>View Creator Profile</span>
+                <Cpu className="w-4 h-4 text-amber-500" />
+                <span>Inspect Smart Profile Icon</span>
                 <ZoomIn className="w-3.5 h-3.5 opacity-60" />
               </button>
             </div>

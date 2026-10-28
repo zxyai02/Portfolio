@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { usePortfolio } from '../context/PortfolioContext';
+import { SmartProfileIcon } from './SmartProfileIcon';
 import { Sparkles, Menu, X, Sun, Moon, Lock, ShieldCheck, User } from 'lucide-react';
 
 export const Navbar: React.FC = () => {
@@ -32,13 +33,7 @@ export const Navbar: React.FC = () => {
             theme === 'dark' ? 'text-zinc-100 hover:text-white' : 'text-zinc-900 hover:text-amber-600'
           }`}
         >
-          <div className={`w-8 h-8 rounded-lg flex items-center justify-center transition-colors shadow-inner ${
-            theme === 'dark'
-              ? 'bg-zinc-900 border border-zinc-700/80 text-amber-400 group-hover:border-amber-400/60'
-              : 'bg-amber-50 border border-amber-200 text-amber-600 group-hover:border-amber-400'
-          }`}>
-            <Sparkles className="w-4 h-4" />
-          </div>
+          <SmartProfileIcon size="sm" interactive={false} />
           <span>{data.profile.name}</span>
         </a>
 

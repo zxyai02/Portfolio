@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState, useEffect, ReactNode } from
 import { PortfolioData, Project, BlogPost, Profile, ContactMessage } from '../types/portfolio';
 import { INITIAL_PORTFOLIO_DATA } from '../data/initialData';
 
-const STORAGE_KEY = 'majestic_portfolio_data_v4';
+const STORAGE_KEY = 'majestic_portfolio_data_v5';
 const THEME_KEY = 'majestic_theme_mode';
 const ADMIN_AUTH_KEY = 'majestic_admin_auth_00';
 

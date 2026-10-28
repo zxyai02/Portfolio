@@ -1,5 +1,6 @@
 import React from 'react';
 import { usePortfolio } from '../context/PortfolioContext';
+import { SmartProfileIcon } from './SmartProfileIcon';
 import {
   MapPin,
   Mail,
@@ -148,17 +149,12 @@ export const AboutSection: React.FC = () => {
                 </span>
               </div>
 
-              {/* Profile Image Viewport with Hover Zoom Prompt */}
+              {/* Profile Image Viewport with Smart Icon & Hover Zoom Prompt */}
               <div
                 onClick={() => setIsProfileZoomOpen(true)}
-                className="relative rounded-xl overflow-hidden bg-zinc-950 border border-zinc-700/80 aspect-4/3 cursor-pointer group shadow-inner mb-4"
+                className="relative rounded-xl overflow-hidden bg-gradient-to-b from-zinc-900 to-zinc-950 border border-zinc-700/80 aspect-4/3 cursor-pointer group shadow-inner mb-4 flex items-center justify-center p-6"
               >
-                <img
-                  src={data.profile.avatarUrl}
-                  alt={data.profile.name}
-                  referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
-                />
+                <SmartProfileIcon size="hero" />
 
                 {/* Scrim with zoom prompt */}
                 <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/90 via-transparent to-transparent flex items-end justify-between p-4 opacity-90 group-hover:opacity-100 transition-opacity">
@@ -167,13 +163,13 @@ export const AboutSection: React.FC = () => {
                       {data.profile.name}
                     </h4>
                     <p className="text-xs text-amber-400 font-mono mt-1">
-                      @{data.profile.handle}
+                      {data.profile.role}
                     </p>
                   </div>
 
                   <span className="px-3 py-1.5 rounded-lg bg-amber-400 text-zinc-950 text-xs font-bold flex items-center gap-1.5 shadow-lg group-hover:bg-amber-300 transition-colors">
                     <ZoomIn className="w-3.5 h-3.5" />
-                    <span>Zoom Profile</span>
+                    <span>Zoom Smart Icon</span>
                   </span>
                 </div>
               </div>

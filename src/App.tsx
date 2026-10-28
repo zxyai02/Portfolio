@@ -18,6 +18,7 @@ import { ProfileZoomModal } from './components/ProfileZoomModal';
 import { ProjectModal } from './components/ProjectModal';
 import { BlogModal } from './components/BlogModal';
 import { ToastContainer } from './components/ToastContainer';
+import { TechCursor } from './components/TechCursor';
 
 function MainLayout() {
   const { theme, isAdmin } = usePortfolio();
@@ -30,6 +31,9 @@ function MainLayout() {
           : 'bg-white text-zinc-900 selection:bg-amber-400 selection:text-zinc-950'
       }`}
     >
+      {/* Tech-Savvy Mouse Pointer Movement Effect */}
+      <TechCursor />
+
       <Navbar />
       {/* Only rendered when unlocked by password '00' */}
       {isAdmin && <AdminPanel />}

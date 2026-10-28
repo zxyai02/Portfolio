@@ -2,13 +2,13 @@ import { PortfolioData } from '../types/portfolio';
 
 export const INITIAL_PORTFOLIO_DATA: PortfolioData = {
   profile: {
-    name: 'Majestic Soul',
-    handle: 'majesticsoul1',
-    role: 'Senior UI/UX Designer & Systems Engineer',
-    tagline: 'Architecting high-density operational software, scientific telemetry systems, and immersive web experiences.',
-    bioHeadline: 'Designing the critical software layer for high-stakes industries.',
+    name: 'SYED AMZAD HOSSAIN',
+    handle: 'amzadhossain',
+    role: 'Industrial Engineer & Tech Enthusiast',
+    tagline: "Hi, I'm SYED AMZAD HOSSAIN",
+    bioHeadline: 'Industrial Engineer & Technology Enthusiast',
     bioParagraphs: [
-      'I am an end-to-end product designer and full-stack systems engineer based in Dhaka, Bangladesh. Over the past 8+ years, I have specialized in turning complex, multi-variable domain problems: from national pharmacy ERPs and RMG supply chain traceability to planetary weather telemetry, into calm, high-velocity digital products.',
+      'INDUSTRIAL ENGINEER & Tech Enthusiastic',
       'My work bridges mathematical precision with humanist editorial elegance: I design design systems in Figma and write the production React, Canvas, and serverless architectures that bring them to life with zero latency and relentless typographic clarity.',
       'When not architecting enterprise SaaS platforms, I build retro-arcade Canvas physics games and curate chromatic abstract fluid graphics licensed globally on Adobe Stock.'
     ],
