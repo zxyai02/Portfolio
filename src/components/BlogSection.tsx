@@ -13,8 +13,8 @@ export const BlogSection: React.FC = () => {
       id="journal"
       className={`py-20 border-b transition-colors scroll-mt-12 ${
         theme === 'dark'
-          ? 'bg-zinc-950 border-zinc-800/60 text-zinc-100'
-          : 'bg-zinc-50 border-zinc-200/80 text-zinc-900'
+          ? 'bg-transparent border-zinc-800/60 text-zinc-100'
+          : 'bg-transparent border-zinc-200/80 text-zinc-900'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -55,10 +55,10 @@ export const BlogSection: React.FC = () => {
             <article
               key={post.id}
               onClick={() => setSelectedBlog(post)}
-              className={`group flex flex-col p-6 rounded-2xl border transition-all duration-300 cursor-pointer shadow-sm hover:shadow-xl ${
+              className={`group flex flex-col p-6 rounded-2xl border backdrop-blur-md transition-all duration-300 cursor-pointer shadow-sm hover:shadow-xl ${
                 theme === 'dark'
-                  ? 'bg-zinc-900/40 border-zinc-800 hover:bg-zinc-900/80 hover:border-zinc-700'
-                  : 'bg-white border-zinc-200 hover:border-zinc-300 shadow-sm'
+                  ? 'bg-zinc-900/60 border-zinc-800 hover:bg-zinc-900/85 hover:border-zinc-700'
+                  : 'bg-white/85 border-zinc-200 hover:bg-white/95 hover:border-zinc-300 shadow-sm'
               }`}
             >
               {/* Cover thumbnail if present */}

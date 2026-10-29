@@ -30,13 +30,13 @@ export const Hero: React.FC = () => {
       id="home"
       className={`relative pt-12 pb-16 lg:pt-20 lg:pb-24 border-b transition-colors overflow-hidden ${
         theme === 'dark'
-          ? 'bg-zinc-950 border-zinc-800/60 text-zinc-100'
-          : 'bg-gradient-to-b from-white via-zinc-50 to-zinc-100 border-zinc-200/80 text-zinc-900'
+          ? 'bg-transparent border-zinc-800/60 text-zinc-100'
+          : 'bg-transparent border-zinc-200/80 text-zinc-900'
       }`}
     >
-      {/* Dynamic Animated Gradient Meshes / Auroras */}
-      <div className="absolute top-0 right-1/4 w-[420px] h-[420px] bg-gradient-to-tr from-amber-500/15 via-rose-500/10 to-indigo-500/15 rounded-full blur-3xl pointer-events-none animate-pulse-glow" />
-      <div className="absolute -bottom-10 left-10 w-[380px] h-[380px] bg-gradient-to-br from-cyan-500/15 via-sky-500/10 to-emerald-500/15 rounded-full blur-3xl pointer-events-none animate-pulse-glow" />
+      {/* Ambient Soft Gradient Meshes (Calm & Static) */}
+      <div className="absolute top-0 right-1/4 w-[420px] h-[420px] bg-gradient-to-tr from-amber-500/10 via-rose-500/5 to-indigo-500/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute -bottom-10 left-10 w-[380px] h-[380px] bg-gradient-to-br from-cyan-500/10 via-sky-500/5 to-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Split-Screen Hero */}
@@ -47,7 +47,7 @@ export const Hero: React.FC = () => {
             <div className="flex flex-wrap items-center gap-2 text-xs font-mono mb-5">
               <button
                 onClick={() => setIsProfileZoomOpen(true)}
-                className={`flex items-center gap-2 px-3 py-1.5 rounded-full border transition-all ${
+                className={`flex items-center gap-2 px-3 py-1.5 rounded-full border transition-colors ${
                   theme === 'dark'
                     ? 'bg-zinc-900/90 border-amber-500/40 text-amber-400 hover:border-amber-400 hover:bg-zinc-800'
                     : 'bg-amber-50 border-amber-300 text-amber-700 hover:bg-amber-100'
@@ -82,27 +82,27 @@ export const Hero: React.FC = () => {
               </div>
             </div>
 
-            {/* Display Headline with Animated Gradient Highlight: "Hi, I'm SYED AMZAD HOSSAIN" */}
-            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.08] mb-4 [text-wrap:balance]">
-              <span className="block text-zinc-400 text-2xl sm:text-3xl lg:text-4xl font-semibold mb-2">
+            {/* Static Clean Headline without animation */}
+            <div className="w-full mb-4">
+              <span className="block text-zinc-500 dark:text-zinc-400 text-2xl sm:text-3xl font-medium tracking-tight mb-2">
                 Hi, I&apos;m
               </span>
-              <span className="bg-gradient-to-r from-amber-400 via-rose-400 to-indigo-400 bg-clip-text text-transparent font-black tracking-wide animate-aurora uppercase">
-                SYED AMZAD HOSSAIN
-              </span>
-            </h1>
+              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-[1.08] text-zinc-900 dark:text-zinc-50 uppercase [text-wrap:balance]">
+                {data.profile.name}
+              </h1>
+            </div>
 
-            {/* Bio Paragraph 1: "INDUSTRIAL ENGINEER & Tech Enthusiastic" */}
+            {/* Role & Specialization Badge (Static, clean, no animation) */}
             <div className="mb-6 flex flex-wrap items-center gap-3">
               <div
-                className={`px-4 py-2 rounded-xl border text-sm sm:text-base font-bold tracking-wider uppercase flex items-center gap-2 shadow-sm ${
+                className={`px-4 py-2 rounded-xl border text-sm sm:text-base font-bold tracking-wide uppercase flex items-center gap-2 shadow-xs ${
                   theme === 'dark'
-                    ? 'bg-amber-400/10 border-amber-400/30 text-amber-300'
+                    ? 'bg-amber-400/10 border-amber-500/30 text-amber-300'
                     : 'bg-amber-50 border-amber-300 text-amber-800'
                 }`}
               >
-                <Zap className="w-4 h-4 text-amber-400 animate-pulse" />
-                <span>{data.profile.bioParagraphs[0]}</span>
+                <Zap className="w-4 h-4 text-amber-500 shrink-0" />
+                <span>{data.profile.bioParagraphs[0] || 'INDUSTRIAL ENGINEER & Tech Enthusiastic'}</span>
               </div>
             </div>
 
@@ -138,9 +138,9 @@ export const Hero: React.FC = () => {
               </button>
             </div>
 
-            {/* Availability Indicator */}
+            {/* Availability Indicator (Static, no pulsing) */}
             <div className="mt-8 flex items-center gap-2.5 text-xs">
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
               <span className={theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'}>
                 {data.profile.availability}
               </span>
@@ -149,10 +149,10 @@ export const Hero: React.FC = () => {
 
           {/* Right Column: Featured Flagship Artifact Frame */}
           <div className="lg:col-span-5">
-            <div className={`relative rounded-2xl border p-2.5 shadow-2xl backdrop-blur-md group transition-all duration-300 hover:border-amber-400/50 ${
+            <div className={`relative rounded-2xl border p-2.5 shadow-2xl backdrop-blur-md ${
               theme === 'dark'
                 ? 'bg-zinc-900/60 border-zinc-800'
-                : 'bg-white border-zinc-200 shadow-xl'
+                : 'bg-white/85 border-zinc-200 shadow-xl'
             }`}>
               {/* Card visual frame */}
               <div className="relative rounded-xl overflow-hidden aspect-4/3 bg-zinc-950 border border-zinc-800/80">
@@ -160,7 +160,7 @@ export const Hero: React.FC = () => {
                   src={featuredProject.image}
                   alt={featuredProject.title}
                   referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-103"
+                  className="w-full h-full object-cover object-top"
                 />
 
                 {/* Scrim for high-contrast legibility */}
@@ -209,10 +209,10 @@ export const Hero: React.FC = () => {
           {data.profile.stats.map((stat, i) => (
             <div
               key={i}
-              className={`flex flex-col p-4 rounded-xl border transition-all ${
+              className={`flex flex-col p-4 rounded-xl border backdrop-blur-md transition-all ${
                 theme === 'dark'
-                  ? 'bg-zinc-900/30 border-zinc-800/80 hover:border-zinc-700'
-                  : 'bg-white border-zinc-200/90 hover:border-zinc-300 shadow-sm'
+                  ? 'bg-zinc-900/50 border-zinc-800/80 hover:border-zinc-700'
+                  : 'bg-white/85 border-zinc-200/90 hover:border-zinc-300 shadow-sm'
               }`}
             >
               <div className="flex items-center justify-between mb-1">

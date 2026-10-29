@@ -10,10 +10,10 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className={`border-t py-12 transition-colors ${
+    <footer className={`border-t py-12 backdrop-blur-md transition-colors ${
       theme === 'dark'
-        ? 'bg-zinc-950 border-zinc-800 text-zinc-400'
-        : 'bg-zinc-100 border-zinc-200 text-zinc-600'
+        ? 'bg-zinc-950/80 border-zinc-800/80 text-zinc-400'
+        : 'bg-[#FAF8F5]/85 border-zinc-200/90 text-zinc-600'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
         {/* Brand & Narrative */}

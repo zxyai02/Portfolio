@@ -74,8 +74,8 @@ export const Gallery: React.FC = () => {
       id="work"
       className={`py-20 border-b transition-colors scroll-mt-12 ${
         theme === 'dark'
-          ? 'bg-zinc-950 border-zinc-800/60 text-zinc-100'
-          : 'bg-zinc-50 border-zinc-200/80 text-zinc-900'
+          ? 'bg-transparent border-zinc-800/60 text-zinc-100'
+          : 'bg-transparent border-zinc-200/80 text-zinc-900'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -214,10 +214,10 @@ export const Gallery: React.FC = () => {
             {filteredProjects.map(project => (
               <div
                 key={project.id}
-                className={`group flex flex-col rounded-xl border transition-all duration-300 hover:shadow-xl overflow-hidden ${
+                className={`group flex flex-col rounded-xl border backdrop-blur-md transition-all duration-300 hover:shadow-xl overflow-hidden ${
                   theme === 'dark'
-                    ? 'border-zinc-800 bg-zinc-900/40 hover:bg-zinc-900/80 hover:border-zinc-700'
-                    : 'border-zinc-200/90 bg-white hover:border-zinc-300 shadow-sm'
+                    ? 'border-zinc-800 bg-zinc-900/60 hover:bg-zinc-900/85 hover:border-zinc-700'
+                    : 'border-zinc-200/90 bg-white/85 hover:bg-white/95 hover:border-zinc-300 shadow-sm'
                 }`}
               >
                 {/* Media Image Frame */}

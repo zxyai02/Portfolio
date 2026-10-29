@@ -27,8 +27,8 @@ export const AboutSection: React.FC = () => {
       id="about"
       className={`py-20 border-b transition-colors scroll-mt-12 ${
         theme === 'dark'
-          ? 'bg-zinc-950 border-zinc-800/60 text-zinc-100'
-          : 'bg-white border-zinc-200/80 text-zinc-900'
+          ? 'bg-transparent border-zinc-800/60 text-zinc-100'
+          : 'bg-transparent border-zinc-200/80 text-zinc-900'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -136,10 +136,10 @@ export const AboutSection: React.FC = () => {
           {/* Right Column: Dedicated Profile Image Section with Zoom Option */}
           <div className="lg:col-span-5 space-y-6">
             {/* Dedicated Profile Image & Zoom Card */}
-            <div className={`rounded-2xl border p-6 shadow-xl backdrop-blur-sm transition-all ${
+            <div className={`rounded-2xl border p-6 shadow-xl backdrop-blur-md transition-all ${
               theme === 'dark'
                 ? 'bg-zinc-900/60 border-zinc-800'
-                : 'bg-white border-zinc-200 shadow-md'
+                : 'bg-white/85 border-zinc-200 shadow-md'
             }`}>
               <div className="text-xs font-mono uppercase tracking-wider text-amber-500 mb-3 flex items-center justify-between">
                 <span>Verified Creator Monograph</span>
@@ -224,8 +224,8 @@ export const AboutSection: React.FC = () => {
             </div>
 
             {/* Skills & Stack Groups */}
-            <div className={`rounded-2xl border p-6 space-y-5 ${
-              theme === 'dark' ? 'bg-zinc-900/40 border-zinc-800' : 'bg-white border-zinc-200 shadow-sm'
+            <div className={`rounded-2xl border p-6 space-y-5 backdrop-blur-md ${
+              theme === 'dark' ? 'bg-zinc-900/60 border-zinc-800' : 'bg-white/85 border-zinc-200 shadow-sm'
             }`}>
               <h4 className={`text-xs font-mono uppercase tracking-wider flex items-center gap-1.5 ${
                 theme === 'dark' ? 'text-zinc-400' : 'text-zinc-500'

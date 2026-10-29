@@ -36,8 +36,8 @@ export const ContactSection: React.FC = () => {
       id="contact"
       className={`py-20 border-b transition-colors scroll-mt-12 ${
         theme === 'dark'
-          ? 'bg-zinc-950 border-zinc-800/60 text-zinc-100'
-          : 'bg-white border-zinc-200/80 text-zinc-900'
+          ? 'bg-transparent border-zinc-800/60 text-zinc-100'
+          : 'bg-transparent border-zinc-200/80 text-zinc-900'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -61,10 +61,10 @@ export const ContactSection: React.FC = () => {
           {/* Left Column: Direct Coordinates & Social Media Links */}
           <div className="lg:col-span-5 space-y-8">
             {/* Primary Direct Contact Box */}
-            <div className={`p-6 rounded-2xl border space-y-5 ${
+            <div className={`p-6 rounded-2xl border space-y-5 backdrop-blur-md ${
               theme === 'dark'
-                ? 'bg-zinc-900/50 border-zinc-800'
-                : 'bg-zinc-50 border-zinc-200 shadow-sm'
+                ? 'bg-zinc-900/60 border-zinc-800'
+                : 'bg-white/85 border-zinc-200 shadow-sm'
             }`}>
               <h3 className={`text-xs font-mono uppercase tracking-wider flex items-center gap-1.5 ${
                 theme === 'dark' ? 'text-zinc-400' : 'text-zinc-500'
@@ -128,10 +128,10 @@ export const ContactSection: React.FC = () => {
             </div>
 
             {/* Social Media Links List */}
-            <div className={`p-6 rounded-2xl border space-y-4 ${
+            <div className={`p-6 rounded-2xl border space-y-4 backdrop-blur-md ${
               theme === 'dark'
-                ? 'bg-zinc-900/30 border-zinc-800'
-                : 'bg-zinc-50 border-zinc-200 shadow-sm'
+                ? 'bg-zinc-900/60 border-zinc-800'
+                : 'bg-white/85 border-zinc-200 shadow-sm'
             }`}>
               <h3 className={`text-xs font-mono uppercase tracking-wider flex items-center gap-1.5 ${
                 theme === 'dark' ? 'text-zinc-400' : 'text-zinc-500'
@@ -176,10 +176,10 @@ export const ContactSection: React.FC = () => {
 
           {/* Right Column: Interactive Dispatch Form */}
           <div className="lg:col-span-7">
-            <div className={`p-6 sm:p-8 rounded-2xl border backdrop-blur-sm ${
+            <div className={`p-6 sm:p-8 rounded-2xl border backdrop-blur-md ${
               theme === 'dark'
-                ? 'bg-zinc-900/40 border-zinc-800'
-                : 'bg-white border-zinc-200 shadow-md'
+                ? 'bg-zinc-900/60 border-zinc-800'
+                : 'bg-white/85 border-zinc-200 shadow-md'
             }`}>
               <h3 className={`text-lg font-bold mb-1 ${
                 theme === 'dark' ? 'text-white' : 'text-zinc-900'
