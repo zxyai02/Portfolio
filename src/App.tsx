@@ -29,7 +29,7 @@ function MainLayout() {
       className={`min-h-screen relative transition-colors duration-300 font-sans flex flex-col ${
         theme === 'dark'
           ? 'bg-zinc-950 text-zinc-100 selection:bg-amber-400 selection:text-zinc-950'
-          : 'bg-[#FAF8F5] text-zinc-900 selection:bg-amber-400 selection:text-zinc-950'
+          : 'bg-white text-zinc-900 selection:bg-amber-400 selection:text-zinc-950'
       }`}
     >
       {/* Dynamic Animated Neural Network & Globe Background */}

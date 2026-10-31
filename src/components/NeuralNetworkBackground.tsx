@@ -393,7 +393,7 @@ export const NeuralNetworkBackground: React.FC = () => {
         className={`absolute inset-0 transition-colors duration-500 pointer-events-none z-20 ${
           theme === 'dark'
             ? 'bg-zinc-950/45'
-            : 'bg-[#FAF8F5]/35'
+            : 'bg-white/35'
         }`}
       />
 

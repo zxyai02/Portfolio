@@ -20,7 +20,7 @@ import {
 export const ProfileZoomModal: React.FC = () => {
   const { isProfileZoomOpen, setIsProfileZoomOpen, data, theme } = usePortfolio();
   const [zoomLevel, setZoomLevel] = useState<number>(1);
-  const [viewMode, setViewMode] = useState<'smart' | 'archive'>('smart');
+  const [viewMode, setViewMode] = useState<'suited' | 'reading' | 'smart'>('suited');
 
   useEffect(() => {
     if (isProfileZoomOpen) {
@@ -76,20 +76,28 @@ export const ProfileZoomModal: React.FC = () => {
             {/* View Mode Toggle */}
             <div className="hidden sm:flex items-center bg-zinc-800 rounded-lg p-0.5 border border-zinc-700 text-xs">
               <button
+                onClick={() => setViewMode('suited')}
+                className={`px-2.5 py-1 rounded-md font-medium transition-colors ${
+                  viewMode === 'suited' ? 'bg-amber-400 text-zinc-950 font-bold' : 'text-zinc-300 hover:text-white'
+                }`}
+              >
+                1. Suited Image
+              </button>
+              <button
+                onClick={() => setViewMode('reading')}
+                className={`px-2.5 py-1 rounded-md font-medium transition-colors ${
+                  viewMode === 'reading' ? 'bg-amber-400 text-zinc-950 font-bold' : 'text-zinc-300 hover:text-white'
+                }`}
+              >
+                2. Reading Image
+              </button>
+              <button
                 onClick={() => setViewMode('smart')}
                 className={`px-2.5 py-1 rounded-md font-medium transition-colors ${
                   viewMode === 'smart' ? 'bg-amber-400 text-zinc-950 font-bold' : 'text-zinc-300 hover:text-white'
                 }`}
               >
                 Smart Icon
-              </button>
-              <button
-                onClick={() => setViewMode('archive')}
-                className={`px-2.5 py-1 rounded-md font-medium transition-colors ${
-                  viewMode === 'archive' ? 'bg-amber-400 text-zinc-950 font-bold' : 'text-zinc-300 hover:text-white'
-                }`}
-              >
-                Monograph
               </button>
             </div>
 
@@ -136,19 +144,26 @@ export const ProfileZoomModal: React.FC = () => {
         {/* Scrollable Body */}
         <div className="overflow-y-auto p-6 sm:p-8 space-y-8">
           {/* Main Zoomable Image / Smart Icon Frame */}
-          <div className="relative rounded-2xl overflow-hidden bg-gradient-to-b from-zinc-900 to-zinc-950 border border-zinc-800 flex items-center justify-center min-h-[340px] max-h-[500px] p-6 shadow-2xl">
+          <div className="relative rounded-2xl overflow-hidden bg-white border border-zinc-200 flex items-center justify-center min-h-[340px] max-h-[500px] p-6 shadow-2xl">
             <div
               className="transition-transform duration-200 ease-out flex items-center justify-center max-w-full"
               style={{ transform: `scale(${zoomLevel})` }}
             >
               {viewMode === 'smart' ? (
                 <SmartProfileIcon size="modal" interactive={false} />
+              ) : viewMode === 'suited' ? (
+                <img
+                  src="/assets/aistudio/Professional_Businessman_In_Suit_And_Tie_Silhouette_Vector_Illustration_Isolated_On_A_White_Background__Silhouette__Man_Silhouette__Businessman_Silhouette_PNG_and_Vector_with_Transparent_Background_for_Free_Download_e1b397e7.jpg"
+                  alt={`${data.profile.name} - Professional Suited Profile Silhouette`}
+                  referrerPolicy="no-referrer"
+                  className="max-h-[440px] w-auto object-contain rounded-xl shadow-md"
+                />
               ) : (
                 <img
-                  src={data.profile.avatarUrl}
-                  alt={`${data.profile.name} - Profile Monograph`}
+                  src="/assets/aistudio/_____________________________10_____________________18________35___________________________________________________________________________________________________9_00_____________3_00__________________________4ca5321b.jpg"
+                  alt={`${data.profile.name} - Reading and Engineering Workstation`}
                   referrerPolicy="no-referrer"
-                  className="max-h-[440px] w-auto object-contain rounded-xl shadow-2xl"
+                  className="max-h-[440px] w-auto object-contain rounded-xl shadow-md"
                 />
               )}
             </div>
@@ -156,9 +171,11 @@ export const ProfileZoomModal: React.FC = () => {
             <div className="absolute bottom-3 left-3 px-3 py-1.5 rounded-lg bg-zinc-950/80 backdrop-blur border border-zinc-800 text-xs font-mono text-zinc-300 flex items-center gap-2">
               <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
               <span>
-                {viewMode === 'smart'
-                  ? 'Smart Engineering Holographic Identity'
-                  : 'Behance Verified Monograph'}
+                {viewMode === 'suited'
+                  ? 'First: Suited Businessman Silhouette'
+                  : viewMode === 'reading'
+                  ? 'Then: Reading & Deep Engineering Work'
+                  : 'Smart Engineering Holographic Identity'}
               </span>
             </div>
           </div>

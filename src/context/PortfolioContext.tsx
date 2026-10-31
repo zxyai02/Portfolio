@@ -89,7 +89,7 @@ export const PortfolioProvider: React.FC<{ children: ReactNode }> = ({ children 
     } catch (e) {
       // ignore
     }
-    return 'dark';
+    return 'light';
   });
 
   // Admin session: strictly secured by password '00'

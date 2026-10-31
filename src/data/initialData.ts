@@ -17,7 +17,7 @@ export const INITIAL_PORTFOLIO_DATA: PortfolioData = {
     email: 'serviceforeuphoria@gmail.com',
     availability: 'Open to select senior product design & engineering roles, contracts, and design consultations.',
     isAvailableForHire: true,
-    avatarUrl: '/assets/aistudio/image_261590ae.png',
+    avatarUrl: '/assets/aistudio/Professional_Businessman_In_Suit_And_Tie_Silhouette_Vector_Illustration_Isolated_On_A_White_Background__Silhouette__Man_Silhouette__Businessman_Silhouette_PNG_and_Vector_with_Transparent_Background_for_Free_Download_e1b397e7.jpg',
     stats: [
       { value: '8+', label: 'Years Experience', subtext: 'Full-Stack UI/UX & Systems' },
       { value: '24+', label: 'Shipped Systems', subtext: 'SaaS, Dashboards & Games' },
